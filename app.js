@@ -38,6 +38,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+app.use('/user/request', require('./routes/user/request'));
+app.use('/user/login', require('./routes/user/login'));
+
 app.use('/mail/test', require('./routes/mail/test'));
 
 // catch 404 and forward to error handler
