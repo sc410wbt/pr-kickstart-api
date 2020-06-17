@@ -32,17 +32,17 @@ router.all('/', async (req, res, next) => {
     //         user: 'kickstartmeeting@pernod-ricard.com', // generated ethereal user
     //         pass: 'Pernod2020', // generated ethereal password
     //     },
-        host: "mail.gandi.net",
+        host: "smtp.exmail.qq.com",
         port: 465,
         secure: true, // true for 465, false for other ports
         auth: {
-            user: 'info@mulias.com', // generated ethereal user
-            pass: 'Mulias052015', // generated ethereal password
+            user: 'admin@blackbox-interactive.com', // email account can send up to 1500 single-recipient emails
+            pass: 'QR!pL491mn',
         },
     });
 
     await transporter.sendMail({
-        from: '"PRC TEST" <info@mulias.com>', // sender address
+        from: '"PRC TEST" <admin@blackbox-interactive.com>', // sender address
         to: "sun.chen@tonnec.com", // list of receivers
         subject: "PRC Kickstart Meeting Confirmation Code", // Subject line
         text: "Heres the code: " + code, // plain text body
