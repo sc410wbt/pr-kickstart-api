@@ -8,6 +8,9 @@ let logger = require('morgan');
 let indexRouter = require('./routes/index');
 let usersRouter = require('./routes/users');
 
+const mongoose = require('./library/Mongoose');
+mongoose.on('error', console.error.bind(console, 'connection error:'));
+
 let app = express();
 app.use(cookieSession({
     name: 'session',

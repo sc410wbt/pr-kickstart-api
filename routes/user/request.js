@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const Token = require('../../library/Token');
 
 /* GET home page. */
-router.all('/', function(req, res, next) {
+router.all('/', async (req, res, next) => {
 
     let data = {
         func: 'request'
@@ -11,7 +12,9 @@ router.all('/', function(req, res, next) {
     let email = req.body.email;
 
     // Verify email is on the whitelist
-
+    let token = new Token({email: 'test@tonnec.com'});
+    await token.save();
+    data.token = token;
 
     // Generate 6 digit code
 
