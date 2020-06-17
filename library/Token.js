@@ -4,8 +4,13 @@ const mongoose = require('mongoose');
 let TokenSchema = mongoose.Schema({
     email: {
         type: String,
-        require: true
-    }
+        required: true
+    },
+    code: {
+        type: String,
+        required: true
+    },
+    used: Boolean
 });
 
 TokenSchema.path('email').validate(email => {
