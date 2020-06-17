@@ -5,17 +5,13 @@ let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 
-let indexRouter = require('./routes/index');
-let usersRouter = require('./routes/users');
-
 const mongoose = require('./library/Mongoose');
 mongoose.on('error', console.error.bind(console, 'connection error:'));
 
 let app = express();
 app.use(cookieSession({
     name: 'session',
-    keys: ['lskdjflsdkf'],
-
+    keys: ['prkickstart'],
     // Cookie Options
     maxAge: 7 * 24 * 60 * 60 * 1000 // 24 hours
 }))
@@ -39,8 +35,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/', require('./routes/index'));
 
 app.use('/user/request', require('./routes/user/request'));
 app.use('/user/login', require('./routes/user/login'));
