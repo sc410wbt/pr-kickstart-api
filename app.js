@@ -1,6 +1,12 @@
+// let mediaDir = __dirname.replace('/api', '/media');
+// mediaDir = mediaDir.replace('/production', '/');
+// mediaDir = mediaDir.replace('/staging', '/');
+// global.__mediadir = mediaDir;
+// global.siteName = 'PR Kickstart';
+
 let createError = require('http-errors');
 const cookieSession = require('cookie-session')
-const express = require('express');
+let express = require('express');
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
@@ -9,6 +15,21 @@ const mongoose = require('./library/Mongoose');
 mongoose.on('error', console.error.bind(console, 'connection error:'));
 
 let app = express();
+
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
+// File uploading
+// let serveStatic = require( "serve-static" );
+// if (process.platform === 'linux') app.use('/media', serveStatic('/var/www/media'));
+// else app.use('/media', serveStatic('/Users/sun/Work/Mulias/Sites/mulias.com/media'));
+
+const fileupload = require('express-fileupload');
+app.use(fileupload()); // Required to handle fetch requests multipart
+
 app.use(cookieSession({
     name: 'session',
     keys: ['prkickstart'],
@@ -28,12 +49,6 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
-
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', require('./routes/index'));
 

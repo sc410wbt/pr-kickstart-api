@@ -4,7 +4,7 @@ const Token = require('../../library/Token');
 const nodemailer = require('nodemailer');
 
 /* GET home page. */
-router.all('/', async (req, res, next) => {
+router.post('/', async (req, res, next) => {
 
     let data = {
         func: 'request'
@@ -13,7 +13,7 @@ router.all('/', async (req, res, next) => {
     let email = req.body.email;
 
     // Verify email is on the whitelist
-    let token = new Token({email: 'test@tonnec.com', used: false});
+    let token = new Token({email: email, used: false});
 
     // Generate 6 digit code
     let code = (Math.random() * 1000000) - 1;
@@ -43,23 +43,27 @@ router.all('/', async (req, res, next) => {
 
     await transporter.sendMail({
         from: '"PRC TEST" <admin@blackbox-interactive.com>', // sender address
-        to: "sun.chen@tonnec.com", // list of receivers
+        to: email, // list of receivers
         subject: "PRC Kickstart Meeting Confirmation Code", // Subject line
         text: "Heres the code: " + code, // plain text body
         html: "<b>Heres the code: " + code + "</b>", // html body
     }, (err, res) => {
         if (err) console.log(err);
-        else console.log(res);
-    })
-
+        else {
+            console.log(res);
+            data.result = 'success';
+        }
+    });
 
 
     // Save token
     await token.save();
+    data.result = 'success';
     data.token = token;
 
     res.set('Content-Type', 'application/json');
-    res.send({data});
+    console.log('sending');
+    res.send(data);
 
 });
 
