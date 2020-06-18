@@ -3,8 +3,7 @@ const router = express.Router();
 const Token = require('../../library/Token');
 const nodemailer = require('nodemailer');
 
-/* GET home page. */
-router.post('/', async (req, res, next) => {
+router.all('/', async (req, res, next) => {
 
     let data = {
         func: 'request'

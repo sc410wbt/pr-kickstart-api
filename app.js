@@ -54,6 +54,7 @@ app.use('/', require('./routes/index'));
 
 app.use('/user/request', require('./routes/user/request'));
 app.use('/user/login', require('./routes/user/login'));
+app.use('/user/logout', require('./routes/user/logout'));
 
 app.use('/mail/test', require('./routes/mail/test'));
 

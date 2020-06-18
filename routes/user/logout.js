@@ -1,16 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
-/* GET home page. */
-router.all('/', function(req, res, next) {
+router.all('/', async (req, res, next) => {
 
-    let session = req.session;
-    session.count++;
+    delete req.session.token;
 
     let data = {
-        hello: 'world',
-        session: req.session
-    }
+        result: 'success'
+    };
 
     res.set('Content-Type', 'application/json');
     res.send(data);
