@@ -41,7 +41,7 @@ router.all('/', async (req, res, next) => {
     });
 
     await transporter.sendMail({
-        from: '"PRC TEST" <admin@blackbox-interactive.com>', // sender address
+        from: '"PRC Kickstart" <kickstartmeeting@pernod-ricard.com>', // sender address
         to: email, // list of receivers
         subject: "PRC Kickstart Meeting Confirmation Code", // Subject line
         text: "Heres the code: " + code, // plain text body
