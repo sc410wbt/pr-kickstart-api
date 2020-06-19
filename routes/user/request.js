@@ -23,7 +23,7 @@ router.all('/', async (req, res, next) => {
 
     // Email
     let transporter = nodemailer.createTransport({
-        host: "smtp.office365.com",
+        host: "mail.office365.com",
         port: 587,
         secure: false, // true for 465, false for other ports
         requireTLS: true, // StartTLS parameter
