@@ -23,21 +23,21 @@ router.all('/', async (req, res, next) => {
 
     // Email
     let transporter = nodemailer.createTransport({
-    //     host: "mail.office365.com",
-    //     port: 587,
-    //     secure: false, // true for 465, false for other ports
-    //     requireTLS: true, // StartTLS parameter
-    //     auth: {
-    //         user: 'kickstartmeeting@pernod-ricard.com', // generated ethereal user
-    //         pass: 'Pernod2020', // generated ethereal password
-    //     },
-        host: "smtp.exmail.qq.com",
-        port: 465,
-        secure: true, // true for 465, false for other ports
+        host: "smtp.office365.com",
+        port: 587,
+        secure: false, // true for 465, false for other ports
+        requireTLS: true, // StartTLS parameter
         auth: {
-            user: 'admin@blackbox-interactive.com', // email account can send up to 1500 single-recipient emails
-            pass: 'QR!pL491mn',
+            user: 'kickstartmeeting@pernod-ricard.com', // generated ethereal user
+            pass: 'Pernod2020', // generated ethereal password
         },
+    //     host: "smtp.exmail.qq.com",
+    //     port: 465,
+    //     secure: true, // true for 465, false for other ports
+    //     auth: {
+    //         user: 'admin@blackbox-interactive.com', // email account can send up to 1500 single-recipient emails
+    //         pass: 'QR!pL491mn',
+    //     },
     });
 
     await transporter.sendMail({
