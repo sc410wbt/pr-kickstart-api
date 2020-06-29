@@ -44,29 +44,32 @@ router.all('/', async (req, res, next) => {
             user: 'kickstartmeeting@pernod-ricard.com', // generated ethereal user
             pass: 'Pernod2020', // generated ethereal password
         },
-    //     host: "smtp.exmail.qq.com",
-    //     port: 465,
-    //     secure: true, // true for 465, false for other ports
-    //     auth: {
-    //         user: 'admin@blackbox-interactive.com', // email account can send up to 1500 single-recipient emails
-    //         pass: 'QR!pL491mn',
-    //     },
+        // host: "smtp.exmail.qq.com",
+        // port: 465,
+        // secure: true, // true for 465, false for other ports
+        // auth: {
+        //     user: 'admin@blackbox-interactive.com', // email account can send up to 1500 single-recipient emails
+        //     pass: 'QR!pL491mn',
+        // },
     });
 
     await transporter.sendMail({
-        // from: '"PRC Kickstart" <kickstartmeeting@pernod-ricard.com>', // sender address
-        to: email, // list of receivers
-        subject: "PRC Kick Start Meeting Access Code", // Subject line
-        text: "Here's your access code to the meeting: " + code + "\r\n" +
-            "这是你的会议验证码：" + code, // plain text body
-        html: "<b>Heres the code: " + code + "</b>", // html body
-    }, (err, res) => {
-        if (err) console.log(err);
-        else {
-            console.log(res);
-            data.result = 'success';
+            // from: '"PRC Kickstart" <admin@blackbox-interactive.com>', // sender address
+            from: '"PRC Kickstart" <kickstartmeeting@pernod-ricard.com>', // sender address
+            to: email, // list of receivers
+            subject: "PRC Kick Start Meeting Access Code", // Subject line
+            text: "Here's your access code to the meeting" + "\r\n" +
+                "这是你的会议验证" + "\r\n" + "\r\n" + code, // plain text body
+            html: "<div>" + (req.body.ln === 'en' ? "Here's your access code to the meeting" : "这是你的会议验证码") + "</div>" +
+                "<div><b>" + code + "</b></div>", // html body
+        }, (err, res) => {
+            if (err) console.log(err);
+            else {
+                console.log(res);
+                data.result = 'success';
+            }
         }
-    });
+    );
 
 
     // Save token
