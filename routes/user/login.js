@@ -18,7 +18,7 @@ router.all('/', async (req, res, next) => {
     if (!token) {
         data.result = 'fail';
         data.error = 'invalid'
-        sendResult(res, data)
+        sendResponse(res, data)
         return false;
     }
 
@@ -26,7 +26,7 @@ router.all('/', async (req, res, next) => {
     if (token.used === true) {
         data.result = 'fail';
         data.error = 'used';
-        sendResult(res, data);
+        sendResponse(res, data);
         return false;
     }
 
@@ -39,7 +39,7 @@ router.all('/', async (req, res, next) => {
         data.error = 'expired';
         data.created = created;
         data.now = now;
-        sendResult(res, data);
+        sendResponse(res, data);
         return false;
     }
 
@@ -51,11 +51,11 @@ router.all('/', async (req, res, next) => {
     req.session.token = token._id
 
     data.result = 'success';
-    sendResult(res, data);
+    sendResponse(res, data);
 
 });
 
-function sendResult(res, data) {
+function sendResponse(res, data) {
     res.set('Content-Type', 'application/json');
     res.send(data);
 }

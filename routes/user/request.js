@@ -12,7 +12,20 @@ router.all('/', async (req, res, next) => {
     let email = req.body.email;
 
     // Verify email is on the whitelist
+    if (email.indexOf('@pernod-ricard.com') > -1 || email.indexOf('@tonnec.com') > -1 ||
+        email.indexOf('@blackbox-interactive.com') > -1 || email.indexOf('@blackbox-i.cn') > -1) {
+        console.log('valid')
+    } else {
+        console.log('invalid');
+        data.result = 'fail';
+        data.error = 'invalid';
+        sendResponse(res, data);
+        return false;
+    }
+
+
     let token = new Token({email: email, used: false});
+    console.log(token);
 
     // Generate 6 digit code
     let code = (Math.random() * 1000000) - 1;
@@ -41,10 +54,11 @@ router.all('/', async (req, res, next) => {
     });
 
     await transporter.sendMail({
-        from: '"PRC Kickstart" <kickstartmeeting@pernod-ricard.com>', // sender address
+        // from: '"PRC Kickstart" <kickstartmeeting@pernod-ricard.com>', // sender address
         to: email, // list of receivers
-        subject: "PRC Kickstart Meeting Confirmation Code", // Subject line
-        text: "Heres the code: " + code, // plain text body
+        subject: "PRC Kick Start Meeting Access Code", // Subject line
+        text: "Here's your access code to the meeting: " + code + "\r\n" +
+            "这是你的会议验证码：" + code, // plain text body
         html: "<b>Heres the code: " + code + "</b>", // html body
     }, (err, res) => {
         if (err) console.log(err);
@@ -60,10 +74,13 @@ router.all('/', async (req, res, next) => {
     data.result = 'success';
     data.token = token;
 
-    res.set('Content-Type', 'application/json');
-    console.log('sending');
-    res.send(data);
+    sendResponse(res, data);
 
 });
+
+function sendResponse(res, data) {
+    res.set('Content-Type', 'application/json');
+    res.send(data);
+}
 
 module.exports = router;
