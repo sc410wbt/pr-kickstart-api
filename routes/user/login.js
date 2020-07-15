@@ -48,7 +48,8 @@ router.all('/', async (req, res, next) => {
     token.save();
 
     // Session save
-    req.session.token = token._id
+    req.session.token = token._id;
+    req.session.email = email;
 
     data.result = 'success';
     sendResponse(res, data);
