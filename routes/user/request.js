@@ -58,10 +58,10 @@ router.all('/', async (req, res, next) => {
             from: '"PRC Kickstart" <kickstartmeeting@pernod-ricard.com>', // sender address
             to: email, // list of receivers
             subject: "PRC Kick Start Meeting Access Code", // Subject line
-            text: "Here's your access code to the meeting" + "\r\n" +
-                "这是你的会议验证" + "\r\n" + "\r\n" + code, // plain text body
-            html: "<div>" + (req.body.ln === 'en' ? "Here's your access code to the meeting" : "这是你的会议验证码") + "</div>" +
-                "<div><b>" + code + "</b></div>", // html body
+            text: "This is your access code to the Kick Start Meeting: " + "\r\n" +
+                "这是你的员工大会验证码：" + "\r\n" + "\r\n" + code, // plain text body
+            html: '<div style="margin-bottom: 10px">' + (req.body.ln === 'en' ? "This is your access code to the Kick Start Meeting: " : "这是你的员工大会验证码：") + code + "</div>" +
+                '<div>' + (req.body.ln === 'en' ? 'Please use the code to log in within 30 minutes. You will remain logged in for the next 14 days.' : '请在30分钟内使用该验证码进行登录，该验证码将会在您成功登陆后14天内有效。') + '</div>', // html body
         }, (err, res) => {
             if (err) console.log(err);
             else {
