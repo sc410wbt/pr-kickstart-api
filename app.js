@@ -38,7 +38,7 @@ app.use(cookieSession({
 }))
 
 const allowedOrigins = [
-    'https://prckickstartmeeting.bbi-x.com', 'http://localhost:4000'
+    'https://prckickstartmeeting.bbi-x.com', 'https://prc.dev.bbi-x.com', 'http://localhost:4000'
 ];
 
 app.use(function(req, res, next) {
