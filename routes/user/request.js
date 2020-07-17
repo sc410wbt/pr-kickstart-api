@@ -10,10 +10,11 @@ router.all('/', async (req, res, next) => {
     }
 
     let email = req.body.email;
+    let lowerEmail = email.toLowerCase();
 
     // Verify email is on the whitelist
-    if (email.indexOf('@pernod-ricard.com') > -1 || email.indexOf('@tonnec.com') > -1 || email.indexOf('@k2-asia.cn') > -1 ||
-        email.indexOf('@blackbox-interactive.com') > -1 || email.indexOf('yackixp@163.com') > -1 || email.indexOf('@blackbox-i.cn') > -1) {
+    if (lowerEmail.indexOf('@pernod-ricard.com') > -1 || lowerEmail.indexOf('@tonnec.com') > -1 || lowerEmail.indexOf('@k2-asia.cn') > -1 ||
+        lowerEmail.indexOf('@blackbox-interactive.com') > -1 || lowerEmail.indexOf('yackixp@163.com') > -1 || lowerEmail.indexOf('@blackbox-i.cn') > -1) {
         console.log('valid')
     } else {
         console.log('invalid');
