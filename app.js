@@ -58,6 +58,9 @@ app.use('/user/logout', require('./routes/user/logout'));
 
 app.use('/mail/test', require('./routes/mail/test'));
 
+app.use('/report', require('./routes/report'));
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     next(createError(404));
