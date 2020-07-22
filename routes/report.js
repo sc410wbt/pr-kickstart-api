@@ -4,17 +4,26 @@ const Token = require('../library/Token');
 
 router.all('/', async (req, res, next) => {
 
-    let unique = [];
+    let unique = '';
 
     let list = await Token.find().exec();
     for (let token of list) {
         let email = token.email;
         email = email.toLowerCase();
-        if (unique.indexOf(email) === -1) unique.push(email);
+        // if (unique.indexOf(email) === -1) {
+            unique += (
+                '<tr>' +
+                    '<td>' + email + '</td>' +
+                    '<td>' + token._id.getTimestamp() + '</td>' +
+                '</tr>'
+            );
+        // }
     }
 
-    res.set('Content-Type', 'application/json');
-    res.send(unique);
+    unique = '<table>' + unique + '</table>';
+
+    res.set('Content-Type', 'text/html');
+    res.send(unique.toString());
 
 });
 
