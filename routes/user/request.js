@@ -43,7 +43,8 @@ router.all('/', async (req, res, next) => {
         requireTLS: true, // StartTLS parameter
         auth: {
             user: 'kickstartmeeting@pernod-ricard.com', // generated ethereal user
-            pass: 'Pernod2020', // generated ethereal password
+            // pass: 'Pernod2020', // generated ethereal password
+            pass: 'Pernod202001'
         },
         // host: "smtp.exmail.qq.com",
         // port: 465,
